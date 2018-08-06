@@ -3,8 +3,11 @@ import logo from './svg/logo.svg';
 import './App.css';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image } from 'react-native'
 import banner from './svg/banner.jpg';
+import { MovieDb } from './movies/MovieDb.js';
 
 class App extends React.Component {
+    movieDb = new MovieDb();
+
     constructor(props) {
         super(props);
 
@@ -16,6 +19,8 @@ class App extends React.Component {
         };
 
         this.submitAnswer = this.submitAnswer.bind(this);
+
+        this.movieDb.GetMovies();
     }
     
     render() {
@@ -68,6 +73,9 @@ class App extends React.Component {
     
     showQuizQuestion(index) {
         console.log(index);
+        console.log(this.movieDb.Movies);
+        console.log(this.movieDb.Movies[0].name);
+        console.log(this.movieDb.Movies[1].year);
         this.setState((prevState) => {
             return {
                 currentQuestionIndex: index,
