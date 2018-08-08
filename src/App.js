@@ -11,7 +11,8 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-                this.movieDb.GetMovies();
+        this.movieDb.GetMovies();
+        this.state = { random: 0 };
     }
 
     render() {
@@ -38,9 +39,12 @@ class App extends React.Component {
     showQuizQuestions() {
 
         this.movieDb.GetMovies();
+
+        const min = 1;
+        const max = 13;
+        let random = Math.floor(Math.random() * (max - min));
+
         const element = (
-
-
             <div class="question">
              <View className="App-header">
             <img src={logo} className="App-logo" />
@@ -50,9 +54,9 @@ class App extends React.Component {
                         style={styles.titleOne}>Thank you.
                   </Text>
             </View>
-                <h3>When does {this.movieDb.Movies[4].name} has been released ?</h3>
+                <h3>When does {this.movieDb.Movies[random].name} has been released ?</h3>
                 <div class="tile_div">
-                    <button>{this.movieDb.Movies[4].year}</button>
+                    <button>{this.movieDb.Movies[random].year}</button>
                     <button>{this.movieDb.Movies[6].year}</button>
                     <button class="last">{this.movieDb.Movies[11].year}</button>
                     <div class="clear"></div>
