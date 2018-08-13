@@ -5,9 +5,12 @@ import { StyleSheet, Text, View} from 'react-native'
 import banner from './svg/banner.jpg';
 import { MovieDb } from './movies/MovieDb.js';
 import ReactDOM from 'react-dom';
+import { Question } from './movies/question.js';
 
 class App extends React.Component {
     movieDb = new MovieDb();
+    movieQuestions;
+    answersList;
 
     constructor(props) {
         super(props);
@@ -40,9 +43,34 @@ class App extends React.Component {
 
         this.movieDb.GetMovies();
 
-        const min = 1;
-        const max = 13;
-        let random = Math.floor(Math.random() * (max - min));
+        this.movieQuestions = new Array();
+        this.answersList = new Array();
+        for (i = 0; i < 5; i++)
+        {
+            let random = Math.floor(Math.random() * this.movieDb.Movies.length);
+            question = new Question(this.movieDb.Movies[random]);
+            this.movieQuestions.push(question);
+
+            itemList = new Array();
+            for (j = 0; j < 3; j++)
+            {
+                if (j == question.rightAnswer)
+                    itemList.push(question.movie.year);
+                else
+                {
+                    year = this.movieDb.Movies[Math.floor(Math.random() * this.movieDb.Movies.length)].year;
+                    while (year == question.movie.year) 
+                        year = this.movieDb.Movies[Math.floor(Math.random() * this.movieDb.Movies.length)].year;
+                    
+                        itemList.push(year);
+                }
+            }
+            this.answersList.push(itemList);
+        }
+
+        console.log(this.movieQuestions);
+        console.log("PQP");
+        console.log(this.answersList);
 
         const element = (
             <div class="question">
@@ -54,41 +82,42 @@ class App extends React.Component {
                         style={styles.titleOne}>Thank you.
                   </Text>
             </View>
-                <h3>When does {this.movieDb.Movies[random].name} has been released ?</h3>
+                <h3>When was the movie {this.movieQuestions[0].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.movieDb.Movies[random].year}</button>
-                    <button>{this.movieDb.Movies[6].year}</button>
-                    <button class="last">{this.movieDb.Movies[11].year}</button>
+                    <button>{this.answersList[0][0]}</button>
+                    <button>{this.answersList[0][1]}</button>
+                    <button class="last">{this.answersList[0][2]}</button>
                     <div class="clear"></div>
                 </div>
-                <h3>When does {this.movieDb.Movies[6].name} has been released ?</h3>
+                <h3>When was the movie {this.movieQuestions[1].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.movieDb.Movies[1].year}</button>
-                    <button>{this.movieDb.Movies[6].year}</button>
-                    <button class="last">{this.movieDb.Movies[9].year}</button>
+                    <button>{this.answersList[1][0]}</button>
+                    <button>{this.answersList[1][1]}</button>
+                    <button class="last">{this.answersList[1][2]}</button>
                     <div class="clear"></div>
                 </div>
-                <h3>When does {this.movieDb.Movies[11].name} has been released ?</h3>
+                <h3>When was the movie {this.movieQuestions[2].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.movieDb.Movies[9].year}</button>
-                    <button>{this.movieDb.Movies[11].year}</button>
-                    <button class="last">{this.movieDb.Movies[5].year}</button>
+                    <button>{this.answersList[2][0]}</button>
+                    <button>{this.answersList[2][1]}</button>
+                    <button class="last">{this.answersList[2][2]}</button>
                     <div class="clear"></div>
                 </div>
-                <h3>When does {this.movieDb.Movies[8].name} has been released ?</h3>
+                <h3>When was the movie {this.movieQuestions[3].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.movieDb.Movies[8].year}</button>
-                    <button>{this.movieDb.Movies[9].year}</button>
-                    <button class="last">{this.movieDb.Movies[10].year}</button>
+                    <button>{this.answersList[3][0]}</button>
+                    <button>{this.answersList[3][1]}</button>
+                    <button class="last">{this.answersList[3][2]}</button>
                     <div class="clear"></div>
                 </div>
-                <h3>When does {this.movieDb.Movies[14].name} has been released ?</h3>
+                <h3>When was the movie {this.movieQuestions[4].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.movieDb.Movies[15].year}</button>
-                    <button>{this.movieDb.Movies[14].year}</button>
-                    <button class="last">{this.movieDb.Movies[10].year}</button>
+                    <button>{this.answersList[4][0]}</button>
+                    <button>{this.answersList[4][1]}</button>
+                    <button class="last">{this.answersList[4][2]}</button>
                     <div class="clear"></div>
                 </div>
+                <button style={{marginTop: 40, marginBottom: 40}} onClick={() => this.showQuizQuestions()}>Play Again</button>
             </div>
         );
         ReactDOM.render(element, document.getElementById('root'));
