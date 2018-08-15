@@ -11,6 +11,9 @@ class App extends React.Component {
     movieDb = new MovieDb();
     movieQuestions;
     answersList;
+    //new
+    correctAnswer;
+    
 
     constructor(props) {
         super(props);
@@ -45,6 +48,8 @@ class App extends React.Component {
 
         this.movieQuestions = new Array();
         this.answersList = new Array();
+       this.correctAnswer = new Array();
+
         for (i = 0; i < 5; i++)
         {
             let random = Math.floor(Math.random() * this.movieDb.Movies.length);
@@ -52,10 +57,15 @@ class App extends React.Component {
             this.movieQuestions.push(question);
 
             itemList = new Array();
+            answer = new Array();
             for (j = 0; j < 3; j++)
             {
-                if (j == question.rightAnswer)
+                if (j == question.rightAnswer){
+                    console.log(question.rightAnswer);
                     itemList.push(question.movie.year);
+                    answer.push(question.rightAnswer);
+                }
+                    
                 else
                 {
                     year = this.movieDb.Movies[Math.floor(Math.random() * this.movieDb.Movies.length)].year;
@@ -66,11 +76,13 @@ class App extends React.Component {
                 }
             }
             this.answersList.push(itemList);
+            //new
+            this.correctAnswer.push(answer);
         }
 
-        console.log(this.movieQuestions);
-        console.log("PQP");
-        console.log(this.answersList);
+        //console.log(this.movieQuestions);
+        // console.log("PQP");
+        // console.log(this.answersList);
 
         const element = (
             <div class="question">
@@ -84,43 +96,94 @@ class App extends React.Component {
             </View>
                 <h3>When was the movie {this.movieQuestions[0].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.answersList[0][0]}</button>
-                    <button>{this.answersList[0][1]}</button>
-                    <button class="last">{this.answersList[0][2]}</button>
+                    <button onClick={() => this.showQuizAns1(0)}>{this.answersList[0][0]}</button>
+                    <button onClick={() => this.showQuizAns1(1)}>{this.answersList[0][1]}</button>
+                    <button onClick={() => this.showQuizAns1(2)} class="last">{this.answersList[0][2]}</button>
                     <div class="clear"></div>
                 </div>
                 <h3>When was the movie {this.movieQuestions[1].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.answersList[1][0]}</button>
-                    <button>{this.answersList[1][1]}</button>
-                    <button class="last">{this.answersList[1][2]}</button>
+                    <button onClick={() => this.showQuizAns2(0)}>{this.answersList[1][0]}</button>
+                    <button onClick={() => this.showQuizAns2(1)}>{this.answersList[1][1]}</button>
+                    <button onClick={() => this.showQuizAns2(2)} class="last">{this.answersList[1][2]}</button>
                     <div class="clear"></div>
                 </div>
                 <h3>When was the movie {this.movieQuestions[2].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.answersList[2][0]}</button>
-                    <button>{this.answersList[2][1]}</button>
-                    <button class="last">{this.answersList[2][2]}</button>
+                    <button onClick={() => this.showQuizAns3(0)}>{this.answersList[2][0]}</button>
+                    <button onClick={() => this.showQuizAns3(1)}>{this.answersList[2][1]}</button>
+                    <button onClick={() => this.showQuizAns3(2)} class="last">{this.answersList[2][2]}</button>
                     <div class="clear"></div>
                 </div>
                 <h3>When was the movie {this.movieQuestions[3].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.answersList[3][0]}</button>
-                    <button>{this.answersList[3][1]}</button>
-                    <button class="last">{this.answersList[3][2]}</button>
+                    <button onClick={() => this.showQuizAns4(0)}>{this.answersList[3][0]}</button>
+                    <button onClick={() => this.showQuizAns4(1)}>{this.answersList[3][1]}</button>
+                    <button onClick={() => this.showQuizAns4(2)} class="last">{this.answersList[3][2]}</button>
                     <div class="clear"></div>
                 </div>
                 <h3>When was the movie {this.movieQuestions[4].movie.name} released ?</h3>
                 <div class="tile_div">
-                    <button>{this.answersList[4][0]}</button>
-                    <button>{this.answersList[4][1]}</button>
-                    <button class="last">{this.answersList[4][2]}</button>
+                    <button onClick={() => this.showQuizAns5(0)}>{this.answersList[4][0]}</button>
+                    <button onClick={() => this.showQuizAns5(1)}>{this.answersList[4][1]}</button>
+                    <button onClick={() => this.showQuizAns5(2)} class="last">{this.answersList[4][2]}</button>
                     <div class="clear"></div>
                 </div>
                 <button style={{marginTop: 40, marginBottom: 40}} onClick={() => this.showQuizQuestions()}>Play Again</button>
             </div>
         );
         ReactDOM.render(element, document.getElementById('root'));
+    }
+
+    showQuizAns1(ans){
+       
+
+        if(ans == this.correctAnswer[0]){
+            console.log("True");
+        }else{
+            console.log("False");
+        }
+
+    }
+
+    showQuizAns2(ans){
+        
+        if(ans == this.correctAnswer[1]){
+            console.log("True");
+        }else{
+            console.log("False");
+        }
+
+    }
+
+    showQuizAns3(ans){
+        
+        if(ans == this.correctAnswer[2]){
+            console.log("True");
+        }else{
+            console.log("False");
+        }
+
+    }
+
+    showQuizAns4(ans){
+        
+        if(ans == this.correctAnswer[3]){
+            console.log("True");
+        }else{
+            console.log("False");
+        }
+
+    }
+
+    showQuizAns5(ans){
+        
+        if(ans == this.correctAnswer[4]){
+            console.log("True");
+        }else{
+            console.log("False");
+        }
+
     }
 
 }
