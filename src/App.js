@@ -87,6 +87,10 @@ class App extends React.Component {
         // console.log("PQP");
         // console.log(this.answersList);
 
+       this.questions();
+    }
+
+    questions(){
         const element = (
             <div class="question">
              <View className="App-header">
@@ -137,7 +141,6 @@ class App extends React.Component {
         );
         ReactDOM.render(element, document.getElementById('root'));
     }
-
   
 
     showQuizAns1(ans){
@@ -196,7 +199,7 @@ class App extends React.Component {
         <div class = "alert alert-success">
       <strong>You've chosen right answer!</strong> 
       
-      <button style={{ marginLeft: 565, marginTop: 23, background: '#7caeff', padding: 10 }} onClick={() => this.showQuizQuestions()}>Back to questions</button>
+      <button style={{ marginLeft: 565, marginTop: 23, background: '#7caeff', padding: 10 }} onClick={() => this.questions()}>Back to questions</button>
                 </div>
         );
         ReactDOM.render(element, document.getElementById('root'));
@@ -209,7 +212,7 @@ class App extends React.Component {
         <div class = "alert alert-danger">
       <strong>You've chosen wrong answer!</strong> 
       
-      <button style={{ marginLeft: 565, marginTop: 23, background: '#7caeff', padding: 10 }} onClick={() => this.showQuizQuestions()}>Back to questions</button>
+      <button style={{ marginLeft: 565, marginTop: 23, background: '#7caeff', padding: 10 }} onClick={() => this.questions()}>Back to questions</button>
                 </div>
         );
         ReactDOM.render(element, document.getElementById('root'));
