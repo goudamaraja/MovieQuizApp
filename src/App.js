@@ -131,10 +131,6 @@ class App extends React.Component {
                     <button onClick={() => this.showQuizAns5(1)}>{this.answersList[4][1]}</button>
                     <button onClick={() => this.showQuizAns5(2)} class="last">{this.answersList[4][2]}</button>
                     <div class="clear"></div>
-
-                    <div className="alert alert-success" role="alert">
-                    Record
-                    </div>
                 </div>
                 <button style={{marginTop: 40, marginBottom: 40}} onClick={() => this.showQuizQuestions()}>Play Again</button>
             </div>
