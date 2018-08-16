@@ -6,6 +6,9 @@ import banner from './svg/banner.jpg';
 import { MovieDb } from './movies/MovieDb.js';
 import ReactDOM from 'react-dom';
 import { Question } from './movies/question.js';
+import {Alert} from 'react-alert-template-basic';
+
+
 
 class App extends React.Component {
     movieDb = new MovieDb();
@@ -18,7 +21,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.movieDb.GetMovies();
-        this.state = { random: 0 };
+        this.state = { random: 0};
     }
 
     render() {
@@ -128,6 +131,10 @@ class App extends React.Component {
                     <button onClick={() => this.showQuizAns5(1)}>{this.answersList[4][1]}</button>
                     <button onClick={() => this.showQuizAns5(2)} class="last">{this.answersList[4][2]}</button>
                     <div class="clear"></div>
+
+                    <div className="alert alert-success" role="alert">
+                    Record
+                    </div>
                 </div>
                 <button style={{marginTop: 40, marginBottom: 40}} onClick={() => this.showQuizQuestions()}>Play Again</button>
             </div>
@@ -135,13 +142,14 @@ class App extends React.Component {
         ReactDOM.render(element, document.getElementById('root'));
     }
 
-    showQuizAns1(ans){
-       
+  
 
-        if(ans == this.correctAnswer[0]){
-            console.log("True");
+    showQuizAns1(ans){
+      if(ans == this.correctAnswer[0]){
+          this.success();
         }else{
-            console.log("False");
+            
+        this.Failure();
         }
 
     }
@@ -149,9 +157,9 @@ class App extends React.Component {
     showQuizAns2(ans){
         
         if(ans == this.correctAnswer[1]){
-            console.log("True");
+            this.success();
         }else{
-            console.log("False");
+            this.Failure();
         }
 
     }
@@ -159,9 +167,9 @@ class App extends React.Component {
     showQuizAns3(ans){
         
         if(ans == this.correctAnswer[2]){
-            console.log("True");
+           this.success();
         }else{
-            console.log("False");
+            this.Failure();
         }
 
     }
@@ -169,9 +177,9 @@ class App extends React.Component {
     showQuizAns4(ans){
         
         if(ans == this.correctAnswer[3]){
-            console.log("True");
+            this.success();
         }else{
-            console.log("False");
+            this.Failure();
         }
 
     }
@@ -179,11 +187,37 @@ class App extends React.Component {
     showQuizAns5(ans){
         
         if(ans == this.correctAnswer[4]){
-            console.log("True");
+            this.success();
         }else{
-            console.log("False");
+            this.Failure();
         }
 
+    }
+
+    success(){
+        
+        const element=(
+        <div class = "alert alert-success">
+      <strong>You've chosen right answer!</strong> 
+      
+      <button style={{ marginLeft: 565, marginTop: 23, background: '#7caeff', padding: 10 }} onClick={() => this.showQuizQuestions()}>Back to questions</button>
+                </div>
+        );
+        ReactDOM.render(element, document.getElementById('root'));
+       
+    }
+
+    Failure(){
+        
+        const element=(
+        <div class = "alert alert-danger">
+      <strong>You've chosen wrong answer!</strong> 
+      
+      <button style={{ marginLeft: 565, marginTop: 23, background: '#7caeff', padding: 10 }} onClick={() => this.showQuizQuestions()}>Back to questions</button>
+                </div>
+        );
+        ReactDOM.render(element, document.getElementById('root'));
+       
     }
 
 }
